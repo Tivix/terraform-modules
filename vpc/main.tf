@@ -11,7 +11,7 @@ resource "aws_vpc" "this" {
   enable_dns_hostnames = "${var.enable_dns_hostnames}"
   enable_dns_support   = "${var.enable_dns_support}"
 
-  tags = "${merge(var.tags, var.vpc_tags, map("Name", format("%s@%s", var.name, var.env)))}"
+  tags = "${merge(var.tags, var.vpc_tags, map("Name", format("%s", var.name)))}"
 }
 
 ###################
@@ -22,7 +22,7 @@ resource "aws_internet_gateway" "this" {
 
   vpc_id = "${aws_vpc.this.id}"
 
-  tags = "${merge(var.tags, map("Name", format("%s@%s", var.name, var.env)))}"
+  tags = "${merge(var.tags, map("Name", format("%s", var.name)))}"
 }
 
 ################
@@ -34,7 +34,7 @@ resource "aws_route_table" "public" {
   vpc_id           = "${aws_vpc.this.id}"
   propagating_vgws = ["${var.public_propagating_vgws}"]
 
-  tags = "${merge(var.tags, var.public_route_table_tags, map("Name", format("%s-public@%s", var.name, var.env)))}"
+  tags = "${merge(var.tags, var.public_route_table_tags, map("Name", format("%s-public", var.name)))}"
 }
 
 resource "aws_route" "public_internet_gateway" {
@@ -56,7 +56,7 @@ resource "aws_subnet" "public" {
   availability_zone       = "${element(var.azs, count.index)}"
   map_public_ip_on_launch = "${var.map_public_ip_on_launch}"
 
-  tags = "${merge(var.tags, var.public_subnet_tags, map("Name", format("%s-public-%s@%s", var.name, element(var.azs, count.index), var.env)))}"
+  tags = "${merge(var.tags, var.public_subnet_tags, map("Name", format("%s-public-%s", var.name, element(var.azs, count.index))))}"
 }
 
 ##################
@@ -69,7 +69,7 @@ resource "aws_subnet" "database" {
   cidr_block        = "${var.database_subnets[count.index]}"
   availability_zone = "${element(var.azs, count.index)}"
 
-  tags = "${merge(var.tags, var.database_subnet_tags, map("Name", format("%s-db-%s@%s", var.name, element(var.azs, count.index),var.env)))}"
+  tags = "${merge(var.tags, var.database_subnet_tags, map("Name", format("%s-db-%s", var.name, element(var.azs, count.index))))}"
 }
 
 resource "aws_db_subnet_group" "database" {
@@ -79,7 +79,7 @@ resource "aws_db_subnet_group" "database" {
   description = "Database subnet group for ${var.name}"
   subnet_ids  = ["${aws_subnet.database.*.id}"]
 
-  tags = "${merge(var.tags, map("Name", format("%s@%s", var.name, var.env)))}"
+  tags = "${merge(var.tags, map("Name", format("%s", var.name)))}"
 }
 
 ##########################

@@ -1,3 +1,7 @@
+variable "env" {
+  description = "Env name to be used in resources names"
+}
+
 variable "name" {
   description = "Name to be used on all resources as prefix"
 }
