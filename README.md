@@ -2,7 +2,7 @@ terraform-modules
 =================
 
 
-Set of terraform modules for basic AWS infra. Some modules comes from _offcial_ terraform modules with modifications for our case. 
+Set of terraform modules for basic AWS infra. Some modules comes from _offcial_ terraform modules with modifications for our case others are crafted specifically for us.
 
 Branch master suppose to be stable but in generall it is work in progress.
 
