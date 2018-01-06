@@ -5,6 +5,12 @@ variable "rules" {
   # Protocols (tcp, udp, icmp, all - are allowed keywords) or numbers (from https://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml):
   # All = -1, IPV4-ICMP = 1, TCP = 6, UDP = 16, IPV6-ICMP = 58
   default = {
+    # portainer
+    portainer = [9000, 9000, "tcp", "Portainer"]
+
+    #grafana
+    grafana = [3000, 3000, "tcp", "Grafana"]
+
     # Prometheus
     prometheus              = [9090, 9090, "tcp", "Prometheus"]
     prometehus-pushgateway  = [9091, 9091, "tcp", "Prometehus pushgateway"]
