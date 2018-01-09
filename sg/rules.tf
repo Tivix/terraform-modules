@@ -11,6 +11,9 @@ variable "rules" {
     #grafana
     grafana = [3000, 3000, "tcp", "Grafana"]
 
+    # Zabbix
+    zabbix-client = [10050, 10050, "tcp", "zabbix client"]
+
     # Prometheus
     prometheus              = [9090, 9090, "tcp", "Prometheus"]
     prometehus-pushgateway  = [9091, 9091, "tcp", "Prometehus pushgateway"]
@@ -44,6 +47,10 @@ variable "rules" {
     docker-swarm-node-tcp    = [7946, 7946, "tcp", "Docker Swarm node"]
     docker-swarm-node-udp    = [7946, 7946, "udp", "Docker Swarm node"]
     docker-swarm-overlay-udp = [4789, 4789, "udp", "Docker Swarm Overlay Network Traffic"]
+
+    # Docker cloud
+    docker-cloud-api = [2375, 2375, "tcp", "Docker cloud docker api"]
+    docker-cloud     = [6783, 6783, "tcp", "Docker cloud"]
 
     # DNS
     dns-udp = [53, 53, "udp", "DNS"]
