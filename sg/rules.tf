@@ -12,7 +12,7 @@ variable "rules" {
     grafana = [3000, 3000, "tcp", "Grafana"]
 
     # Zabbix
-    zabbix-client = [10050, 10050, "tcp", "zabbix client"]
+    zabbix = [10050, 10050, "tcp", "Zabbix"]
 
     # Prometheus
     prometheus              = [9090, 9090, "tcp", "Prometheus"]
