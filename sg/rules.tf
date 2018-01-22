@@ -77,6 +77,9 @@ variable "rules" {
     # LDAPS
     ldaps-tcp = [636, 636, "tcp", "LDAPS"]
 
+    # Logstash
+    logstash = [5044, 5044, "tcp", "Logstash"]
+
     # Memcached
     memcached-tcp = [11211, 11211, "tcp", "Memcached"]
 
