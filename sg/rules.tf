@@ -5,6 +5,9 @@ variable "rules" {
   # Protocols (tcp, udp, icmp, all - are allowed keywords) or numbers (from https://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml):
   # All = -1, IPV4-ICMP = 1, TCP = 6, UDP = 16, IPV6-ICMP = 58
   default = {
+    # elastic apm server
+    elastic-apm-server = [8200, 8200, "tcp", "elastic apm-server"]
+
     # portainer
     portainer = [9000, 9000, "tcp", "Portainer"]
 
