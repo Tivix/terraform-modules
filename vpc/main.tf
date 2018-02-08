@@ -45,6 +45,17 @@ resource "aws_route" "public_internet_gateway" {
   gateway_id             = "${aws_internet_gateway.this.id}"
 }
 
+#################
+# Private routes
+#################
+resource "aws_route_table" "private" {
+  count = "${max(length(var.private_subnets), length(var.database_subnets))}"
+
+  vpc_id = "${aws_vpc.this.id}"
+
+  tags = "${merge(var.tags, var.private_route_table_tags, map("Name", format("%s-private-%s", var.name, element(var.azs, count.index))))}"
+}
+
 ################
 # Public subnet
 ################
@@ -88,7 +99,8 @@ resource "aws_db_subnet_group" "database" {
 resource "aws_route_table_association" "database" {
   count = "${length(var.database_subnets)}"
 
-  subnet_id = "${element(aws_subnet.database.*.id, count.index)}"
+  subnet_id      = "${element(aws_subnet.database.*.id, count.index)}"
+  route_table_id = "${element(aws_route_table.private.*.id, count.index)}"
 }
 
 resource "aws_route_table_association" "public" {
